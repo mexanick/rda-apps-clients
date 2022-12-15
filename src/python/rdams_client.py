@@ -76,6 +76,7 @@ def add_ds_str(ds_num):
 def obfuscate(string):
     """Obfuscate string."""
     return codecs.encode(string, 'rot_13')
+
 def unobfuscate(string):
     """Decode obfuscated string."""
     return codecs.decode(string, 'rot_13')
@@ -110,7 +111,6 @@ def read_pw_file(pwfile):
         pwstring = unobfuscate(f.read())
         (username, password) = pwstring.split(',', 2)
     return(username, password)
-
 
 def read_control_file(control_file):
     """Reads control file, and return python dict.
@@ -322,7 +322,6 @@ def get_cookies(username=None, password=None):
         exit(1)
     return ret.cookies
 
-
 def get_summary(ds):
     """Returns summary of dataset.
 
@@ -375,7 +374,6 @@ def get_all_params(ds):
         param_names.add(param['param'])
     return param_names
 
-
 def get_param_summary(ds):
     """Return summary of parameters for a dataset.
 
@@ -393,7 +391,6 @@ def get_param_summary(ds):
 
     check_status(ret)
     return ret.json()
-
 
 def submit_json(json_file):
     """Submit a RDA subset or format conversion request using json file or dict.
@@ -434,7 +431,6 @@ def submit(control_file_name):
     """
     _dict = read_control_file(control_file_name)
     return submit_json(_dict)
-
 
 def get_status(request_idx=None):
     """Get status of request.
@@ -477,7 +473,6 @@ def get_filelist(request_idx):
     check_status(ret)
 
     return ret.json()
-
 
 def download(request_idx):
     """Download files given request Index
