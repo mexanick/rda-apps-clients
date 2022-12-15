@@ -15,6 +15,7 @@ rdams-client.py -get_control_file_template <dsnnn.n>
 rdams-client.py -help
 ```
 """
+
 __version__ = '2.0.1'
 __author__ = 'Doug Schuster (schuster@ucar.edu), Riley Conroy (rpconroy@ucar.edu)'
 
@@ -32,7 +33,7 @@ USE_NETRC = False
 DEFAULT_AUTH_FILE = './rdamspw.txt'
 
 
-def query(args=None):
+def main(args=None):
     """Perform a query based on command line like arguments.
 
     Args:
@@ -43,9 +44,9 @@ def query(args=None):
 
     Example:
         ```
-        >>> query(['-get_status', '123456'])
+        >>> main(['-get_status', '123456'])
 
-        >>> query(['-get_metadata', 'ds083.2'])
+        >>> main(['-get_metadata', 'ds083.2'])
         ```
     """
     parser = get_parser()
@@ -608,4 +609,4 @@ def get_selected_function(args_dict):
 
 if __name__ == "__main__":
     """Calls main method"""
-    query(sys.argv[1:])
+    main(sys.argv[1:])
