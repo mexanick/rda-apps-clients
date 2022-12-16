@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rdams_client"
+authors = [{name = "Doug Schuster", email = "schuster@ucar.edu"},
+           {name = "Riley Conroy", email = "rpconroy@ucar.edu"},
+          ]
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: MIT License"]
+dynamic = ["version"]
+dependencies = ["requests"]
+description = "Research Data Archive (RDA) python client"
+
+[project.urls]
+Home = "https://github.com/NCAR/rda-apps-clients"
+
+[project.scripts]
+rdams_client = "rdams_client:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "rdams_client.__version__"}

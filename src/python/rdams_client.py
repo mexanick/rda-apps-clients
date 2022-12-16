@@ -15,6 +15,7 @@ rdams-client.py -get_control_file_template <dsnnn.n>
 rdams-client.py -help
 ```
 """
+
 __version__ = '2.0.1'
 __author__ = 'Doug Schuster (schuster@ucar.edu), Riley Conroy (rpconroy@ucar.edu)'
 
@@ -32,7 +33,7 @@ USE_NETRC = False
 DEFAULT_AUTH_FILE = './rdamspw.txt'
 
 
-def query(args=None):
+def main(args=None):
     """Perform a query based on command line like arguments.
 
     Args:
@@ -43,9 +44,9 @@ def query(args=None):
 
     Example:
         ```
-        >>> query(['-get_status', '123456'])
+        >>> main(['-get_status', '123456'])
 
-        >>> query(['-get_metadata', 'ds083.2'])
+        >>> main(['-get_metadata', 'ds083.2'])
         ```
     """
     parser = get_parser()
@@ -76,6 +77,7 @@ def add_ds_str(ds_num):
 def obfuscate(string):
     """Obfuscate string."""
     return codecs.encode(string, 'rot_13')
+
 def unobfuscate(string):
     """Decode obfuscated string."""
     return codecs.decode(string, 'rot_13')
@@ -110,7 +112,6 @@ def read_pw_file(pwfile):
         pwstring = unobfuscate(f.read())
         (username, password) = pwstring.split(',', 2)
     return(username, password)
-
 
 def read_control_file(control_file):
     """Reads control file, and return python dict.
@@ -322,7 +323,6 @@ def get_cookies(username=None, password=None):
         exit(1)
     return ret.cookies
 
-
 def get_summary(ds):
     """Returns summary of dataset.
 
@@ -375,7 +375,6 @@ def get_all_params(ds):
         param_names.add(param['param'])
     return param_names
 
-
 def get_param_summary(ds):
     """Return summary of parameters for a dataset.
 
@@ -393,7 +392,6 @@ def get_param_summary(ds):
 
     check_status(ret)
     return ret.json()
-
 
 def submit_json(json_file):
     """Submit a RDA subset or format conversion request using json file or dict.
@@ -434,7 +432,6 @@ def submit(control_file_name):
     """
     _dict = read_control_file(control_file_name)
     return submit_json(_dict)
-
 
 def get_status(request_idx=None):
     """Get status of request.
@@ -477,7 +474,6 @@ def get_filelist(request_idx):
     check_status(ret)
 
     return ret.json()
-
 
 def download(request_idx):
     """Download files given request Index
@@ -613,4 +609,4 @@ def get_selected_function(args_dict):
 
 if __name__ == "__main__":
     """Calls main method"""
-    query(sys.argv[1:])
+    main(sys.argv[1:])
